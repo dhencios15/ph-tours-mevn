@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app" class="container-fluid mt-3">
+    <MainNavbar />
+    <transition name="slide-fade" mode="out-in">
+      <router-view />
+    </transition>
+    <MainFooter class="mt-5" />
   </div>
 </template>
 
+<script>
+export default {
+  components: {
+    MainNavbar: require('./components/MainNavbar').default,
+    MainFooter: require('./components/MainFooter').default
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
 }
 
-#nav {
-  padding: 30px;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.2s ease;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
 }
 </style>
